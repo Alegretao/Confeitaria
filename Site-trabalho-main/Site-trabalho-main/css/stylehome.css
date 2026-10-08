@@ -1,0 +1,195 @@
+@font-face {
+    font-family: 'Brittany';
+    src: url('fonts/Brittany.ttf');
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Thin.ttf');
+}
+/* NaV */
+.nav-premium {
+    background: linear-gradient(
+        90deg,
+        #fffaf1 0%,
+        #f7e7c6 50%,
+        #d1b586 100%
+    );
+
+    border-bottom: 2px solid #d1b586;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,0.08);
+
+    padding: 14px 30px;
+}
+
+.nav-premium .navbar-brand {
+    color: #6b4328;
+
+    font-weight: 700;
+
+    text-shadow:
+    0 1px 2px rgba(255,255,255,0.20);
+}
+
+.nav-premium .nav-link {
+    color: #6b4328;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    margin-left: 18px;
+
+    transition: 0.3s ease;
+}
+
+.nav-premium .nav-link:hover {
+    color: #b8863b;
+}
+/* FOOTER */
+.footer-premium {
+    background: linear-gradient(135deg, #c38b2d, #5a3923);
+    border-top: 3px solid #c38b2d;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+    border-radius: 25px 25px 0 0;
+    padding: 50px 20px;
+    color: white;
+    text-align: center;
+}
+
+.footer-premium h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #f5d7a1;
+
+    text-shadow:
+    0 2px 5px rgba(0,0,0,0.30);
+}
+
+.footer-premium p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+
+    text-shadow:
+    0 1px 3px rgba(0,0,0,0.25);
+}
+.carousel-item img{
+    height: 400px;
+    object-fit: cover;
+}
+.navbar {
+    background-color: #d1b586;
+}
+footer{
+    background-color: #d1b586;
+}
+body {
+    background-color: #fdfaf5;
+    font-family: 'Times New Roman', Times, serif;
+}
+.carousel {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.titulo-encantado {
+    font-family: 'Brittany', cursive;
+    font-size: 4rem;
+    color: #d8b98a;
+    text-shadow:
+    0 2px 4px rgba(0,0,0,0.15),
+    0 0 12px rgba(216,185,138,0.35);
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+.btn-wpp {
+    background-color:#c38b2d;
+    border-color:#c38b2d;
+    padding: 14px 30px;
+    font-size: 18px;
+    border-radius: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+    color: #fffaf1;
+}
+.titulo-encantado:hover {
+    color: #e7c99b;
+    
+    text-shadow:
+        0 4px 10px rgba(0,0,0,0.20),
+        0 0 18px rgba(231,201,155,0.45);
+}
+.titulo-vendido {
+    font-family: 'Brittany', sans-serif;
+    font-size: 50px;
+    color: #b8860b;
+}
+.paragrafo-vendido {
+    font-family: 'Poppins';
+    font-size: 16px;
+    color: #7a5c46;
+}
+.nome-empresa{
+    font-size: 50px;
+    font-family: 'Brittany', sans-serif;
+    color: #fffaf1;
+}
+
+
+.central-esquerda {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+/* STYLE DO CARD */
+.card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    color: #4b2e2e;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #7a5c46;
+}
+
+.btn-primary {
+    background: #b8860b;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition: 0.3s;
+}
+.btn-primary:hover {
+    background: #a8741a;
+}
+.btn-ver{
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: #fffaf1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}

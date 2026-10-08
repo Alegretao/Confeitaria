@@ -1,0 +1,150 @@
+.login-area {
+    min-height: 68vh;
+}
+
+.login-apresentacao {
+    background: linear-gradient(135deg, #c38b2d, #6b4328);
+    color: #fffaf1;
+    border-radius: 28px;
+    padding: 48px;
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 14px 34px rgba(90, 57, 35, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-apresentacao::after {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: rgba(255, 250, 241, 0.10);
+    right: -80px;
+    bottom: -90px;
+}
+
+.login-mini {
+    color: #f5d7a1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .86rem;
+}
+
+.login-apresentacao h1 {
+    font-size: 2.5rem;
+    margin: 14px 0 18px;
+    font-weight: 700;
+}
+
+.login-apresentacao p {
+    font-size: 1.08rem;
+    max-width: 430px;
+}
+
+.login-detalhe {
+    font-size: 4rem;
+    color: #f5d7a1;
+    margin-top: 28px;
+}
+
+.login-card {
+    background: #fff;
+    border: 1px solid #ead8b8;
+    border-radius: 28px;
+    padding: 38px;
+    box-shadow: 0 14px 34px rgba(90, 57, 35, 0.12);
+}
+
+.login-card h2 {
+    color: #6b4328;
+    font-weight: 700;
+}
+
+.login-icone {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f7e7c6;
+    color: #a8741a;
+    font-size: 2rem;
+}
+
+.tipo-acesso {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tipo-acesso .btn {
+    border: 1px solid #d1b586;
+    color: #6b4328;
+    border-radius: 12px;
+    padding: 10px 8px;
+}
+
+.tipo-acesso .btn-check:checked + .btn {
+    background: #b8860b;
+    border-color: #b8860b;
+    color: #fffaf1;
+}
+
+.login-card .form-control,
+.login-card .input-group-text,
+.login-card .btn-outline-secondary {
+    border-color: #dfc9a4;
+}
+
+.login-card .form-control:focus {
+    border-color: #b8860b;
+    box-shadow: 0 0 0 .25rem rgba(184, 134, 11, .12);
+}
+
+.login-card .input-group-text {
+    background: #fffaf1;
+    color: #8a6237;
+}
+
+.btn-login {
+    background: #b8860b;
+    color: #fffaf1;
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(184, 134, 11, .22);
+}
+
+.btn-login:hover {
+    background: #a8741a;
+    color: white;
+}
+
+.voltar-home {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    color: #7a5c46;
+    text-decoration: none;
+}
+
+.voltar-home:hover {
+    color: #b8860b;
+}
+
+@media (max-width: 576px) {
+    .login-card {
+        padding: 26px 20px;
+    }
+
+    .tipo-acesso {
+        grid-template-columns: 1fr;
+    }
+}

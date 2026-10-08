@@ -1,0 +1,29 @@
+FÁBRICA ENCANTADA - PROJETO INTEGRADO
+=====================================
+
+1. Coloque a pasta Site-trabalho-main dentro de htdocs do XAMPP.
+2. Inicie Apache e MySQL.
+3. No phpMyAdmin, importe o arquivo Confeitaria.sql.
+4. Abra:
+   http://localhost/Site-trabalho-main/pages/home.html
+
+LOGIN
+-----
+Página:
+http://localhost/Site-trabalho-main/pages/login.php
+
+Administrador de teste:
+E-mail: admin@fabrica.com
+Senha: 123456
+
+Cliente de teste:
+Telefone: 11988887777
+Senha: senha123
+
+O login de administrador redireciona para painel_admin.php.
+O login de cliente redireciona para avaliacao.php.
+
+OBSERVAÇÃO
+----------
+A conexão usa localhost / root / senha vazia / banco CONFEITARIA,
+conforme o arquivo form/avaliacoes.php.
