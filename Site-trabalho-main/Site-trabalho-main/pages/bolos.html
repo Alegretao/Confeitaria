@@ -57,6 +57,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="carrinho.php">
+                            <i class="bi-bi-cart3 me-1"></i>
+                            Carrinho
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="login.php">
                             <i class="bi bi-person-circle me-1"></i>Login
                         </a>
@@ -103,11 +110,12 @@
                         <p class="card-text">
                             Bolo coberto com ganache intensa de chocolate e finalizado com crocantes confeitos gourmet. Perfeito para quem ama sabor marcante e muita cremosidade.
                         </p>
-
+                    <form action="carrinho.php" method="POST">
+                        <input type="hidden" name="bolo" value="Choco Ball">
                         <button class="btn btn-success" onclick="adicionarCarrinho('Choco Ball')">
                         <i class="bi bi-cart-plus me-2"></i> Adicionar ao carrinho
                         </button>
-
+                    </form>
                     </div>
 
                 </div>
