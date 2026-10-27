@@ -46,6 +46,7 @@ $mysqli->close();
             <li class="nav-item"><a class="nav-link" href="bolos.html">Bolos</a></li>
             <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
             <li class="nav-item"><a class="nav-link active" href="avaliacao.php">Avaliações</a></li>
+            <li class="nav-item"><a class="nav-link" href="carrinho.php"><i class="bi bi-cart3 me-1"></i>Carrinho</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= usuarioLogado() ? 'logout.php' : 'login.php' ?>"><?= usuarioLogado() ? 'Sair' : 'Login' ?></a></li>
           </ul>
         </div>
