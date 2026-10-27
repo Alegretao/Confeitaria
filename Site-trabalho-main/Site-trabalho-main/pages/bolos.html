@@ -379,30 +379,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-        <script>
-    function adicionarCarrinho(nomeBolo) {
-        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-        let encontrado = false;
-
-        for (let i = 0; i < carrinho.length; i++) {
-            if (carrinho[i].nome === nomeBolo) {
-                carrinho[i].quantidade++;
-                encontrado = true;
-            }
-        }
-
-        if (encontrado === false) {
-            carrinho.push({
-                nome: nomeBolo,
-                quantidade: 1
-            });
-        }
-
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
-        alert(nomeBolo + ' foi adicionado ao carrinho!');
-     }
 
     </script>
 
