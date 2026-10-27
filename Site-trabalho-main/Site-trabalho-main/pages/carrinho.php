@@ -1,12 +1,11 @@
-
 <?php
 session_start();
 
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = array();
+    
 }
 
-// Adicionar bolo ao carrinho
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bolo'])) {
     $bolo = $_POST['bolo'];
 
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bolo'])) {
     }
 }
 
-// Remover bolo do carrinho
+
 if (isset($_GET['remover'])) {
     $bolo = $_GET['remover'];
 
@@ -27,7 +26,7 @@ if (isset($_GET['remover'])) {
     }
 }
 
-// Alterar quantidade
+
 if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
     $bolo = $_POST['alterar'];
     $quantidade = (int) $_POST['quantidade'];
