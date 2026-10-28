@@ -1,1 +1,19 @@
+body .btn-success:hover {
+        background-color: #326b52;
+        border-color: #326b52;
+    }
 
+    .btn-secondary {
+        background-color: #765665;
+        border-color: #765665;
+    }
+
+    .form-control {
+        border-color: #e8c5d3;
+        border-radius: 8px;
+    }
+
+    .form-control:focus {
+        border-color: #d8759b;
+        box-shadow: 0 0 0 0.2rem rgba(216, 117, 155, 0.2);
+    }
