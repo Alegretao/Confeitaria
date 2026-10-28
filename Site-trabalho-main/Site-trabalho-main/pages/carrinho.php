@@ -107,7 +107,7 @@ if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
         echo "<p><strong>Total de unidades: "
             . $totalItens . "</strong></p>";
 
-        echo "<p>Os preços serão consultados pelo WhatsApp.</p>";
+        echo "<p>Consulte os preços e finalize seu pedido pelo WhatsApp.</p>";
 
         echo "<form action='finalizar_pedido.php' method='POST'>";
         echo "<button type='submit' class='btn btn-success'>";
