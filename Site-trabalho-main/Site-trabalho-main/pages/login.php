@@ -39,6 +39,7 @@ $mensagens = [
                 <li class="nav-item"><a class="nav-link" href="bolos.html">Bolos</a></li>
                 <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
                 <li class="nav-item"><a class="nav-link" href="avaliacao.php">Avaliações</a></li>
+                <li class="nav-item"><a class="nav-link" href="carrinho.php"><i class="bi bi-cart3 me-1"></i>Carrinho</a></li>
                 <li class="nav-item"><a class="nav-link active" href="login.php"><i class="bi bi-person-circle me-1"></i>Login</a></li>
             </ul>
         </div>
