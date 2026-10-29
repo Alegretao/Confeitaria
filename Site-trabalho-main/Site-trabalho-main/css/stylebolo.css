@@ -85,7 +85,8 @@ body {
     font-family: 'Brittany', sans-serif;
     color: #fffaf1;
 }
-a.btn {
+a.btn,
+button.btn{
     background-color: #c38b2d;
     border-color: #c38b2d;
     transition: 0.3s;
@@ -93,7 +94,8 @@ a.btn {
     color: #fffaf1;
 }
 
-a.btn:hover {
+a.btn:hover,
+button.btn:hover{
     background-color: #a8741a;
     border-color: #a8741a;
     color: #fffaf1;
