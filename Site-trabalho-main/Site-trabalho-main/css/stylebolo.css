@@ -86,13 +86,17 @@ body {
     color: #fffaf1;
 }
 a.btn {
+    background-color: #c38b2d;
+    border-color: #c38b2d;
     transition: 0.3s;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     color: #fffaf1;
 }
+
 a.btn:hover {
-    background-color: #25D366;
-    
+    background-color: #a8741a;
+    border-color: #a8741a;
+    color: #fffaf1;
 }
 .titulo-borda {
     text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.35);
