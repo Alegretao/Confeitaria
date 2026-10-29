@@ -32,12 +32,20 @@ h1 {
     font-weight: normal;
     margin-bottom: 30px;
     text-align: center;
-
-    text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.15),
-        0 0 12px rgba(216, 185, 138, 0.35);
-
+    text-shadow:0 2px 4px rgba(0, 0, 0, 0.15),0 0 12px rgba(216, 185, 138, 0.35);
     transition: 0.3s ease;
+    background: linear-gradient(
+        90deg,
+        #fffaf1 0%,
+        #f7e7c6 100%
+    );
+    border: 1px solid #d1b586;
+    border-radius: 20px;
+    padding: 20px 40px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08)
 }
 
 h1:hover {
