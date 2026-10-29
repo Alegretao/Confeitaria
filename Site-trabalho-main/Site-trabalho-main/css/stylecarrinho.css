@@ -1,9 +1,22 @@
+
+@font-face {
+    font-family: 'Brittany';
+    src: url('fonts/Brittany.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Thin.ttf');
+}
+
+/* ESTILO GERAL */
 body {
     background-color: #fdfaf5;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
     color: #4b2e2e;
 }
 
+/* CONTAINER */
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -11,131 +24,226 @@ body {
     padding-bottom: 40px;
 }
 
+/* TÍTULO PRINCIPAL */
 h1 {
-    color: #6b4328;
-    font-weight: bold;
+    font-family: 'Brittany', cursive;
+    font-size: 4rem;
+    color: #d8b98a;
+    font-weight: normal;
     margin-bottom: 30px;
+    text-align: center;
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 0 12px rgba(216, 185, 138, 0.35);
+
+    transition: 0.3s ease;
 }
 
+h1:hover {
+    color: #e7c99b;
+
+    text-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.20),
+        0 0 18px rgba(231, 201, 155, 0.45);
+}
+
+/* CARDS */
 .card {
     border: none;
     border-radius: 20px;
     overflow: hidden;
-    background: #fff;
+    background: #fffaf1;
+
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+
+    transition: 0.3s ease;
     margin-bottom: 20px;
 }
 
 .card:hover {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
 }
 
 .card-body {
     padding: 20px;
 }
 
+/* TÍTULOS DOS CARDS */
 .card-title {
-    color: #4b2e2e;
-    font-weight: 600;
-    font-size: 1.4rem;
+    font-family: 'Brittany', cursive;
+    color: #b8863b;
+    font-weight: normal;
+    font-size: 2rem;
     margin-bottom: 18px;
 }
 
+/* RÓTULOS DOS FORMULÁRIOS */
 .form-label {
     display: block;
     color: #6b4328;
     font-weight: bold;
     margin-bottom: 8px;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* CAMPOS DE FORMULÁRIO */
 .form-control {
     max-width: 180px;
     border: 1px solid #d1b586;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 10px;
+
     background-color: #fffaf1;
     color: #4b2e2e;
+
     margin-bottom: 12px;
+
+    transition: 0.3s ease;
 }
 
 .form-control:focus {
     border-color: #b8863b;
-    box-shadow: 0 0 0 0.2rem rgba(184, 134, 59, 0.2);
+
+    box-shadow:
+        0 0 0 0.2rem rgba(184, 134, 59, 0.2);
+
+    background-color: #fffaf1;
+    outline: none;
 }
 
-/* BOTÕES */
-
+/* BOTÕES GERAIS */
 .btn {
     display: inline-block;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-family: 'Times New Roman', Times, serif;
+    border-radius: 14px;
+    padding: 12px 22px;
+
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
+
     text-decoration: none;
-    transition: 0.3s;
+    transition: 0.3s ease;
     cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* BOTÃO PRINCIPAL */
 .btn-primary {
-    background-color: #d1b586;
-    border: 1px solid #b8863b;
-    color: #4b2e2e;
-}
+    background: linear-gradient(
+        135deg,
+        #d1b586,
+        #b8863b
+    );
 
-.btn-primary:hover {
-    background-color: #b8863b;
-    border-color: #b8863b;
+    border: 1px solid #b8863b;
     color: #fffaf1;
 }
 
+.btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        #b8863b,
+        #8b642b
+    );
+
+    border-color: #8b642b;
+    color: #fffaf1;
+
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* BOTÃO DE EXCLUSÃO */
 .btn-danger {
-    background-color: #8b4935;
+    background: linear-gradient(
+        135deg,
+        #a65c43,
+        #6b3425
+    );
+
     border: 1px solid #8b4935;
     color: #fffaf1;
 }
 
 .btn-danger:hover {
-    background-color: #6b3425;
+    background: #5a2b20;
+    border-color: #5a2b20;
     color: #fffaf1;
+
+    transform: translateY(-2px);
 }
 
+/* BOTÃO WHATSAPP */
 .btn-success {
-    background-color: #25D366;
-    border: 1px solid #25D366;
-    color: white;
-    padding: 12px 20px;
-    font-size: 1rem;
+    background-color: #c38b2d;
+    border: 1px solid #c38b2d;
+    color: #fffaf1;
+
+    padding: 14px 30px;
+    font-size: 18px;
+    border-radius: 14px;
+
+    font-weight: 600;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 .btn-success:hover {
-    background-color: #1da851;
-    border-color: #1da851;
-    color: white;
+    background-color: #a8741a;
+    border-color: #a8741a;
+    color: #fffaf1;
+
+    transform: translateY(-2px);
 }
 
+/* BOTÃO SECUNDÁRIO */
 .btn-secondary {
-    background-color: #6b4328;
+    background: linear-gradient(
+        135deg,
+        #6b4328,
+        #4b2e2e
+    );
+
     border: 1px solid #6b4328;
     color: #fffaf1;
 }
 
 .btn-secondary:hover {
-    background-color: #4b2e2e;
-    border-color: #4b2e2e;
+    background: #3d241d;
+    border-color: #3d241d;
     color: #fffaf1;
+
+    transform: translateY(-2px);
 }
 
+/* PARÁGRAFOS */
 p {
     color: #7a5c46;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
 }
 
+/* TEXTOS EM DESTAQUE */
 strong {
     color: #6b4328;
+    font-weight: bold;
 }
 
+/* LINKS */
+a {
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #b8863b;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 600px) {
     .container {
         padding-top: 25px;
@@ -143,14 +251,30 @@ strong {
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2.8rem;
+        margin-bottom: 24px;
     }
 
     .card-body {
         padding: 16px;
     }
 
+    .card-title {
+        font-size: 1.7rem;
+    }
+
+    .form-control {
+        max-width: 100%;
+        width: 100%;
+    }
+
     .btn {
         margin-bottom: 5px;
+        padding: 10px 16px;
+    }
+
+    .btn-success {
+        padding: 12px 20px;
+        font-size: 16px;
     }
 }
