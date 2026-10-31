@@ -10,7 +10,20 @@ $mysqli = conectar();
 $pedidos  = listarPedidos($mysqli);
 $produtos = listarProdutos($mysqli);
 $clientes = listarClientes($mysqli);
-?>
+
+$pedidosAtivos = [];
+$pedidosHitorico = [];
+
+foreach ($pedidos as $pedido) {
+  $status = $pedido['status_PEDIDOS'] ?? '';
+
+  if (in_array($status, ['Entregue','Retirado', 'Cancelado'], true)) {
+    $pedidoHistorico[] = $pedido;
+  } else {
+    $pedidosAtivos[] = $pedido;
+  }
+}
+    ?>
 <!doctype html>
 <html lang="pt-br">
   <head>
