@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -7,7 +6,7 @@ if (!isset($_SESSION['carrinho']) || count($_SESSION['carrinho']) == 0) {
     exit;
 }
 
-$mensagem = "Olá! Gostaria de consultar os preços destes bolos:%0A";
+$mensagem = "Olá! Gostaria de consultar os preços destes bolo e fazer meu pedido:%0A";
 
 $nomes = array_keys($_SESSION['carrinho']);
 
@@ -23,7 +22,12 @@ $telefone = "5511999999999";
 
 $link = "https://wa.me/" . $telefone . "?text=" . $mensagem;
 
+// Apaga o carrinho somente se for um cliente logado
+if (isset($_SESSION['usuario_id'], $_SESSION['usuario_tipo']) &&
+    $_SESSION['usuario_tipo'] === 'cliente') {
+    unset($_SESSION['carrinho']);
+}
+
 header("Location: " . $link);
 exit;
 ?>
-
