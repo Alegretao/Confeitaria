@@ -11,6 +11,7 @@ if (!isset($_SESSION["usuario_id"]) || $_SESSION["usuario_tipo"] != "admin") {
 
 // Inclui a conexão com o banco
 include("avaliacoes.php");
+$mysqli = conectar();
 
 // Recebe o ID do cliente
 $id = (int) $_POST["idCLIENTES"];
