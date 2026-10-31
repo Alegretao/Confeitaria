@@ -1,9 +1,9 @@
+
 <?php
 session_start();
 
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = array();
-    
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bolo'])) {
@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['bolo'])) {
     }
 }
 
-
 if (isset($_GET['remover'])) {
     $bolo = $_GET['remover'];
 
@@ -25,7 +24,6 @@ if (isset($_GET['remover'])) {
         unset($_SESSION['carrinho'][$bolo]);
     }
 }
-
 
 if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
     $bolo = $_POST['alterar'];
@@ -49,7 +47,6 @@ if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
 
     <title>Meu Carrinho - Fábrica Encantada</title>
 
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
           rel="stylesheet">
     <link rel="stylesheet" href="../css/stylecarrinho.css">
@@ -58,6 +55,11 @@ if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
 <body class="bg-light">
 
 <div class="container py-5">
+
+    <a href="bolos.html" class="btn btn-secondary btn-voltar">
+        <i class="bi bi-arrow-left"></i>
+        Voltar aos bolos
+    </a>
 
     <h1 class="mb-4">
         <i class="bi bi-cart3"></i>
@@ -107,7 +109,7 @@ if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
         echo "<p><strong>Total de unidades: "
             . $totalItens . "</strong></p>";
 
-        echo "<p>Consulte os preços e finalize seu pedido pelo WhatsApp.</p>";
+        echo "<p class='texto-finalizacao'>Consulte os preços e finalize seu pedido pelo WhatsApp.</p>";
 
         echo "<form action='finalizar_pedido.php' method='POST'>";
         echo "<button type='submit' class='btn btn-success'>";
@@ -117,13 +119,7 @@ if (isset($_POST['alterar']) && isset($_POST['quantidade'])) {
     }
     ?>
 
-    <a href="bolos.html" class="btn btn-secondary mt-3">
-        <i class="bi bi-arrow-left"></i>
-        Voltar aos bolos
-    </a>
-
 </div>
 
 </body>
 </html>
-
