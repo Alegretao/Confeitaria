@@ -78,33 +78,72 @@ $clientes = listarClientes($mysqli);
       <br/>
 
       <h3>Produtos</h3>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
+
+<?php if (isset($_GET['produto']) && $_GET['produto'] === 'sucesso'): ?>
+    <div class="alert alert-success">Produto cadastrado com sucesso!</div>
+<?php elseif (isset($_GET['produto']) && $_GET['produto'] === 'erro'): ?>
+    <div class="alert alert-danger">Não foi possível cadastrar o produto. Confira os dados e tente novamente.</div>
+<?php endif; ?>
+
+<div class="card p-3 mb-4">
+    <h5>Adicionar novo bolo</h5>
+
+    <form action="../form/adicionar_produto.php" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label class="form-label">Nome do bolo</label>
+            <input type="text" name="nome" class="form-control" maxlength="100" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea name="descricao" class="form-control" maxlength="255" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Foto do bolo</label>
+            <input type="file" name="foto" class="form-control" accept="image/png,image/jpeg,image/webp" required>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Cadastrar produto</button>
+
+    </form>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
             <th>Imagem</th>
             <th>Nome</th>
             <th>Descrição</th>
-            <th>Preço</th>
             <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (count($produtos) === 0): ?>
-            <tr><td colspan="5" class="text-center">Nenhum produto cadastrado.</td></tr>
-          <?php else: ?>
-            <?php foreach ($produtos as $produto): ?>
-              <tr>
-                <td><?php $img = basename((string) $produto['url_IMAGENS']); ?><img src="../img/<?= htmlspecialchars($img) ?>" alt="" style="max-width:80px;"></td>
-                <td><?= htmlspecialchars($produto['nome_PRODUTOS']) ?></td>
-                <td><?= htmlspecialchars($produto['descricao_PRODUTOS']) ?></td>
-                <td>R$ <?= number_format((float) $produto['preco_PRODUTOS'], 2, ',', '.') ?></td>
-                <td><?= htmlspecialchars($produto['status_PRODUTOS']) ?></td>
-              </tr>
-            <?php endforeach; ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
+        </tr>
+    </thead>
 
+    <tbody>
+        <?php if (count($produtos) === 0): ?>
+            <tr>
+                <td colspan="4" class="text-center">Nenhum produto cadastrado.</td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($produtos as $produto): ?>
+                <tr>
+                    <td>
+                        <?php $img = basename((string) $produto['url_IMAGENS']); ?>
+                        <img src="../img/<?= htmlspecialchars($img) ?>" alt="" style="max-width:80px;">
+                    </td>
+
+                    <td><?= htmlspecialchars($produto['nome_PRODUTOS']) ?></td>
+
+                    <td><?= htmlspecialchars($produto['descricao_PRODUTOS']) ?></td>
+
+                    <td><?= htmlspecialchars($produto['status_PRODUTOS']) ?></td>
+                 </tr>
+              <?php endforeach; ?>
+          <?php endif; ?>
+      </tbody>
+  </table>
+       
       <br/>
 
       <h3>Clientes</h3>
