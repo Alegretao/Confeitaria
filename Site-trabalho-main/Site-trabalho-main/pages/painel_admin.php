@@ -167,11 +167,12 @@ foreach ($pedidos as $pedido) {
             <th>Nome</th>
             <th>Endereço</th>
             <th>Telefone</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           <?php if (count($clientes) === 0): ?>
-            <tr><td colspan="4" class="text-center">Nenhum cliente cadastrado.</td></tr>
+            <tr><td colspan="5" class="text-center">Nenhum cliente cadastrado.</td></tr>
           <?php else: ?>
             <?php foreach ($clientes as $cliente): ?>
               <tr>
