@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/../form/avaliacoes.php';
 require_once __DIR__ . '/../form/consultas_admin.php';
@@ -357,7 +356,8 @@ foreach ($pedidos as $pedido) {
 
     </div>
 
-  <table class="table table-striped table-bordered">
+
+<table class="table table-striped table-bordered">
 
     <thead>
         <tr>
@@ -405,41 +405,31 @@ foreach ($pedidos as $pedido) {
 
                             <span class="badge bg-success">Disponível</span>
 
-                            <form action="../form/atualizar_status_produto.php"
-                                  method="POST" class="mt-2">
-
-                                <input type="hidden" name="idPRODUTOS"
-                                       value="<?= (int) $produto['idPRODUTOS'] ?>">
-
-                                <input type="hidden" name="status"
-                                       value="Indisponível">
-
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    Tornar indisponível
-                                </button>
-
-                            </form>
-
                         <?php else: ?>
 
                             <span class="badge bg-danger">Indisponível</span>
 
-                            <form action="../form/atualizar_status_produto.php"
-                                  method="POST" class="mt-2">
-
-                                <input type="hidden" name="idPRODUTOS"
-                                       value="<?= (int) $produto['idPRODUTOS'] ?>">
-
-                                <input type="hidden" name="status"
-                                       value="Disponível">
-
-                                <button type="submit" class="btn btn-success btn-sm">
-                                    Tornar disponível
-                                </button>
-
-                            </form>
-
                         <?php endif; ?>
+
+                        <form action="../form/atualizar_status_produto.php"
+                              method="POST" class="mt-2">
+
+                            <input type="hidden" name="idPRODUTOS"
+                                   value="<?= (int) $produto['idPRODUTOS'] ?>">
+
+                            <button type="submit" name="status"
+                                    value="Disponível"
+                                    class="btn btn-success btn-sm mb-1">
+                                Tornar disponível
+                            </button>
+
+                            <button type="submit" name="status"
+                                    value="Indisponível"
+                                    class="btn btn-danger btn-sm mb-1">
+                                Tornar indisponível
+                            </button>
+
+                        </form>
 
                     </td>
 
@@ -452,6 +442,7 @@ foreach ($pedidos as $pedido) {
     </tbody>
 
 </table>
+
     <br>
 
     <!-- CLIENTES -->
