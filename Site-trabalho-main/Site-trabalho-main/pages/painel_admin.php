@@ -12,16 +12,16 @@ $produtos = listarProdutos($mysqli);
 $clientes = listarClientes($mysqli);
 
 $pedidosAtivos = [];
-$pedidosHitorico = [];
+$pedidosHistorico = [];
 
 foreach ($pedidos as $pedido) {
-  $status = $pedido['status_PEDIDOS'] ?? '';
+    $status = strtolower($pedido['status_PEDIDOS'] ?? '');
 
-  if (in_array($status, ['Entregue','Retirado', 'Cancelado'], true)) {
-    $pedidosHistorico[] = $pedido;
-  } else {
-    $pedidosAtivos[] = $pedido;
-  }
+    if (in_array($status, ['entregue', 'retirado', 'cancelado'], true)) {
+        $pedidosHistorico[] = $pedido;
+    } else {
+        $pedidosAtivos[] = $pedido;
+    }
 }
     ?>
 <!doctype html>
@@ -48,45 +48,73 @@ foreach ($pedidos as $pedido) {
     <div class="container">
 
       <h3>Pedidos</h3>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
             <th>#Pedido</th>
             <th>Cliente</th>
             <th>Data</th>
             <th>Status</th>
             <th>Retirada</th>
             <th>Itens</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php if (count($pedidos) === 0): ?>
-            <tr><td colspan="6" class="text-center">Nenhum pedido cadastrado.</td></tr>
-          <?php else: ?>
-            <?php foreach ($pedidos as $pedido): ?>
-              <?php $itens = listarItensDoPedido($mysqli, (int) $pedido['idPEDIDOS'], (int) $pedido['CLIENTES_idCLIENTES']); ?>
-              <tr>
-                <td><?= (int) $pedido['idPEDIDOS'] ?></td>
-                <td><?= htmlspecialchars($pedido['nome_Clientes']) ?></td>
-                <td><?= htmlspecialchars($pedido['data_PEDIDOS']) ?></td>
-                <td><?= htmlspecialchars($pedido['status_PEDIDOS']) ?></td>
-                <td><?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?></td>
-                <td>
-                  <ul class="mb-0">
-                    <?php foreach ($itens as $item): ?>
-                      <li>
-                        <?= htmlspecialchars($item['nome_PRODUTOS']) ?>
-                        (x<?= (int) $item['quantidade_PRODUTOS'] ?>)
-                        — R$ <?= number_format((float) $item['preco_PRODUTOS'], 2, ',', '.') ?>
-                      </li>
-                    <?php endforeach; ?>
-                  </ul>
-                </td>
-              </tr>
+            <th>Atualizar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php if (count($pedidosAtivos) === 0): ?>
+            <tr>
+                <td colspan="7" class="text-center">Nenhum pedido ativo.</td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($pedidosAtivos as $pedido): ?>
+                <?php $itens = listarItensDoPedido($mysqli, (int) $pedido['idPEDIDOS'], (int) $pedido['CLIENTES_idCLIENTES']); ?>
+
+                <tr>
+                    <td><?= (int) $pedido['idPEDIDOS'] ?></td>
+                    <td><?= htmlspecialchars($pedido['nome_Clientes']) ?></td>
+                    <td><?= htmlspecialchars($pedido['data_PEDIDOS']) ?></td>
+                    <td><?= htmlspecialchars($pedido['status_PEDIDOS']) ?></td>
+                    <td><?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?></td>
+
+                    <td>
+                        <ul class="mb-0">
+                            <?php foreach ($itens as $item): ?>
+                                <li>
+                                    <?= htmlspecialchars($item['nome_PRODUTOS']) ?>
+                                    (x<?= (int) $item['quantidade_PRODUTOS'] ?>)
+                                    — R$ <?= number_format((float) $item['preco_PRODUTOS'], 2, ',', '.') ?>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </td>
+
+                    <td>
+                        <form action="../form/atualizar_status.php" method="POST">
+                            <input type="hidden" name="idPEDIDOS" value="<?= (int) $pedido['idPEDIDOS'] ?>">
+                            <input type="hidden" name="idCLIENTES" value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
+
+                            <select name="status" class="form-select mb-2">
+                                <option value="Aguardando confirmação">Aguardando confirmação</option>
+                                <option value="Confirmado">Confirmado</option>
+                                <option value="Em preparo">Em preparo</option>
+                                <option value="Pronto para retirada">Pronto para retirada</option>
+                                <option value="Entregue">Entregue</option>
+                                <option value="Retirado">Retirado</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Salvar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             <?php endforeach; ?>
-          <?php endif; ?>
-        </tbody>
-      </table>
+        <?php endif; ?>
+    </tbody>
+</table>
 
       <br/>
 
