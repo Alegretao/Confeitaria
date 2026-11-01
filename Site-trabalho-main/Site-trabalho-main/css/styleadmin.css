@@ -1,0 +1,219 @@
+body {
+    background-color: #fdfaf5;
+    font-family: 'Times New Roman', Times, serif;
+    color: #6b4328;
+}
+
+.painel-encantado {
+    background-color: #fdfaf5;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+/* TÍTULOS */
+
+.painel-encantado h1 {
+    color: #8b612d;
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.painel-encantado h2 {
+    color: #8b612d;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.painel-encantado h3 {
+    color: #6b4328;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+/* CARDS E SEÇÕES */
+
+.painel-encantado .card {
+    background-color: #ffffff;
+    border: 1px solid #eadcc5;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.painel-encantado .card-header {
+    background: linear-gradient(90deg, #fffaf1, #f0dfc0);
+    color: #6b4328;
+    font-weight: bold;
+    border-bottom: 1px solid #d1b586;
+    padding: 15px;
+}
+
+.painel-encantado .card-body {
+    padding: 22px;
+}
+
+/* TABELAS */
+
+.painel-encantado .table {
+    background-color: #ffffff;
+    border-color: #e5d3b3;
+    border-radius: 12px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.painel-encantado .table thead th {
+    background-color: #d1b586;
+    color: #5a3923;
+    font-weight: bold;
+    padding: 14px;
+    border-color: #c4a675;
+    text-align: center;
+}
+
+.painel-encantado .table tbody td {
+    color: #6b4328;
+    padding: 12px;
+    border-color: #eadcc5;
+    vertical-align: middle;
+}
+
+.painel-encantado .table tbody tr:hover {
+    background-color: #fff8eb;
+}
+
+/* IMAGENS DOS PRODUTOS */
+
+.painel-encantado table img {
+    max-width: 85px;
+    max-height: 85px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #eadcc5;
+}
+
+/* CAMPOS DE FORMULÁRIO */
+
+.painel-encantado .form-control,
+.painel-encantado .form-select {
+    border: 1px solid #d1b586;
+    border-radius: 10px;
+    padding: 10px;
+    color: #6b4328;
+    background-color: #ffffff;
+}
+
+.painel-encantado .form-control:focus,
+.painel-encantado .form-select:focus {
+    border-color: #b8863b;
+    box-shadow: 0 0 0 0.2rem rgba(184, 134, 59, 0.20);
+}
+
+/* BOTÕES GERAIS */
+
+.painel-encantado .btn {
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    padding: 8px 14px;
+}
+
+/* BOTÃO PRINCIPAL */
+
+.painel-encantado .btn-primary {
+    background-color: #b8863b;
+    border-color: #b8863b;
+    color: #fffaf1;
+}
+
+.painel-encantado .btn-primary:hover {
+    background-color: #946a2d;
+    border-color: #946a2d;
+}
+
+/* BOTÃO DE DISPONIBILIDADE */
+
+.painel-encantado .btn-success {
+    background-color: #71845b;
+    border-color: #71845b;
+    color: white;
+}
+
+.painel-encantado .btn-success:hover {
+    background-color: #596b45;
+}
+
+/* BOTÃO DE INDISPONIBILIDADE E EXCLUSÃO */
+
+.painel-encantado .btn-danger {
+    background-color: #a65343;
+    border-color: #a65343;
+    color: white;
+}
+
+.painel-encantado .btn-danger:hover {
+    background-color: #873d30;
+}
+
+/* BOTÃO DE ALTERAÇÃO */
+
+.painel-encantado .btn-warning {
+    background-color: #d1a24f;
+    border-color: #d1a24f;
+    color: white;
+}
+
+.painel-encantado .btn-warning:hover {
+    background-color: #b8863b;
+    border-color: #b8863b;
+    color: white;
+}
+
+/* STATUS DOS PEDIDOS E PRODUTOS */
+
+.painel-encantado .badge {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+/* LINKS */
+
+.painel-encantado a {
+    text-decoration: none;
+}
+
+/* MENSAGENS */
+
+.painel-encantado .alert {
+    border-radius: 12px;
+    border: none;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+
+    .painel-encantado {
+        padding: 15px;
+    }
+
+    .painel-encantado h1 {
+        font-size: 2rem;
+    }
+
+    .painel-encantado h2 {
+        font-size: 1.5rem;
+    }
+
+    .painel-encantado .table {
+        font-size: 0.85rem;
+    }
+
+    .painel-encantado .btn {
+        margin-bottom: 5px;
+    }
+}
