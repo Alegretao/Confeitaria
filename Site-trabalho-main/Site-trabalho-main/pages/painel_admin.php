@@ -333,99 +333,101 @@ foreach ($pedidos as $pedido) {
 
     </div>
 
-    <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered">
 
-        <thead>
+    <thead>
+        <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <?php if (count($produtos) === 0): ?>
+
             <tr>
-                <th>Imagem</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Status</th>
-                <th>Disponibilidade</th>
+                <td colspan="4" class="text-center">
+                    Nenhum produto cadastrado.
+                </td>
             </tr>
-        </thead>
 
-        <tbody>
+        <?php else: ?>
 
-            <?php if (count($produtos) === 0): ?>
+            <?php foreach ($produtos as $produto): ?>
 
                 <tr>
-                    <td colspan="5" class="text-center">
-                        Nenhum produto cadastrado.
+
+                    <td>
+                        <?php $img = basename((string) $produto['url_IMAGENS']); ?>
+
+                        <img src="../img/<?= htmlspecialchars($img) ?>"
+                             alt="" style="max-width:80px;">
                     </td>
-                </tr>
 
-            <?php else: ?>
+                    <td>
+                        <?= htmlspecialchars($produto['nome_PRODUTOS']) ?>
+                    </td>
 
-                <?php foreach ($produtos as $produto): ?>
+                    <td>
+                        <?= htmlspecialchars($produto['descricao_PRODUTOS']) ?>
+                    </td>
 
-                    <tr>
+                    <td>
 
-                        <td>
+                        <?php if ($produto['status_PRODUTOS'] === 'Disponível'): ?>
 
-                            <?php $img = basename((string) $produto['url_IMAGENS']); ?>
-
-                            <img src="../img/<?= htmlspecialchars($img) ?>"
-                                 alt="" style="max-width:80px;">
-
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($produto['nome_PRODUTOS']) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($produto['descricao_PRODUTOS']) ?>
-                        </td>
-
-                        <td>
-                            <?= htmlspecialchars($produto['status_PRODUTOS']) ?>
-                        </td>
-
-                        <td>
+                            <span class="badge bg-success">Disponível</span>
 
                             <form action="../form/atualizar_status_produto.php"
-                                  method="POST">
+                                  method="POST" class="mt-2">
 
                                 <input type="hidden" name="idPRODUTOS"
                                        value="<?= (int) $produto['idPRODUTOS'] ?>">
 
-                                <?php if ($produto['status_PRODUTOS'] === 'Disponível'): ?>
+                                <input type="hidden" name="status"
+                                       value="Indisponível">
 
-                                    <input type="hidden" name="status"
-                                           value="Indisponível">
-
-                                    <button type="submit"
-                                            class="btn btn-danger btn-sm">
-                                        Tornar indisponível
-                                    </button>
-
-                                <?php else: ?>
-
-                                    <input type="hidden" name="status"
-                                           value="Disponível">
-
-                                    <button type="submit"
-                                            class="btn btn-success btn-sm">
-                                        Tornar disponível
-                                    </button>
-
-                                <?php endif; ?>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Tornar indisponível
+                                </button>
 
                             </form>
 
-                        </td>
+                        <?php else: ?>
 
-                    </tr>
+                            <span class="badge bg-danger">Indisponível</span>
 
-                <?php endforeach; ?>
+                            <form action="../form/atualizar_status_produto.php"
+                                  method="POST" class="mt-2">
 
-            <?php endif; ?>
+                                <input type="hidden" name="idPRODUTOS"
+                                       value="<?= (int) $produto['idPRODUTOS'] ?>">
 
-        </tbody>
+                                <input type="hidden" name="status"
+                                       value="Disponível">
 
-    </table>
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Tornar disponível
+                                </button>
 
+                            </form>
+
+                        <?php endif; ?>
+
+                    </td>
+
+                </tr>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
+
+    </tbody>
+
+</table>
     <br>
 
     <!-- CLIENTES -->
