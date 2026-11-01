@@ -188,7 +188,22 @@ foreach ($pedidos as $pedido) {
       <br/>
 
       <h3>Clientes</h3>
-      <table class="table table-striped table-bordered">
+
+       <form action="../form/adicionar_cliente.php" method="POST" class="mb-4">
+       <h5>Adicionar cliente</h5>
+       <label>Nome:</label>
+       <input type="text" name="nome" class="form-control" maxlength="50" required>
+       <label>Endereço:</label>
+       <input type="text" name="endereco" class="form-control" maxlength="45" required>
+       <label>Telefone:</label>
+       <input type="tel" name="telefone" class="form-control" maxlength="11" required>
+       <button type="submit" class="btn btn-success mt-3">
+        Adicionar cliente
+       </button>
+
+    </form>
+
+<table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>#Cliente</th>
