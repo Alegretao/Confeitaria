@@ -170,6 +170,12 @@ foreach ($pedidos as $pedido) {
       <br/>
 
       <h3>Produtos</h3>
+        <?php if (isset($_GET['produto']) && $_GET['produto'] === 'status_sucesso'): ?>
+    <div class="alert alert-success">
+        Disponibilidade do produto atualizada com sucesso!
+    </div>
+<?php endif; ?>
+        
 
 <?php if (isset($_GET['produto']) && $_GET['produto'] === 'sucesso'): ?>
     <div class="alert alert-success">Produto cadastrado com sucesso!</div>
