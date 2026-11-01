@@ -525,10 +525,11 @@ foreach ($pedidos as $pedido) {
                                class="btn btn-warning btn-sm">
                                 Alterar
                             </a>
-
-                            <button class="btn btn-danger btn-sm" disabled>
+                            <a href="../form/excluir_clientes.php?id=<?= (int) $cliente['idCLIENTES'] ?>"
+                                class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Tem certeza que deseja excluir este cliente?')">
                                 Excluir
-                            </button>
+                            </a>
 
                         </td>
 
