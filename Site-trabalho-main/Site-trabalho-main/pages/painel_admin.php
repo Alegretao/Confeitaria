@@ -144,126 +144,150 @@ foreach ($pedidos as $pedido) {
 
     </form>
 
-    <table class="table table-striped table-bordered">
+   
+<table class="table table-striped table-bordered">
 
-        <thead>
-            <tr>
-                <th>#Pedido</th>
-                <th>Cliente</th>
-                <th>Data</th>
-                <th>Status</th>
-                <th>Retirada</th>
-                <th>Itens</th>
-                <th>Atualizar</th>
-            </tr>
-        </thead>
+    <thead>
+        <tr>
+            <th>#Pedido</th>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Retirada</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Atualizar</th>
+        </tr>
+    </thead>
+
+    <?php if (count($pedidosAtivos) === 0): ?>
 
         <tbody>
-
-            <?php if (count($pedidosAtivos) === 0): ?>
-
-                <tr>
-                    <td colspan="7" class="text-center">
-                        Nenhum pedido ativo.
-                    </td>
-                </tr>
-
-            <?php else: ?>
-
-                <?php foreach ($pedidosAtivos as $pedido): ?>
-
-                    <?php
-                    $itens = listarItensDoPedido(
-                        $mysqli,
-                        (int) $pedido['idPEDIDOS'],
-                        (int) $pedido['CLIENTES_idCLIENTES']
-                    );
-                    ?>
-
-                    <tr>
-
-                        <td><?= (int) $pedido['idPEDIDOS'] ?></td>
-
-                        <td><?= htmlspecialchars($pedido['nome_Clientes']) ?></td>
-
-                        <td><?= htmlspecialchars($pedido['data_PEDIDOS']) ?></td>
-
-                        <td><?= htmlspecialchars($pedido['status_PEDIDOS']) ?></td>
-
-                        <td><?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?></td>
-
-                        <td>
-                            <ul class="mb-0">
-
-                                <?php foreach ($itens as $item): ?>
-
-                                    <li>
-                                        <?= htmlspecialchars($item['nome_PRODUTOS']) ?>
-
-                                        (x<?= (int) $item['quantidade_PRODUTOS'] ?>)
-
-                                        — R$ <?= number_format(
-                                            (float) $item['preco_PRODUTOS'],
-                                            2,
-                                            ',',
-                                            '.'
-                                        ) ?>
-                                    </li>
-
-                                <?php endforeach; ?>
-
-                            </ul>
-                        </td>
-
-                        <td>
-
-                            <form action="../form/atualizar_status_pedido.php" method="POST">
-
-                                <input type="hidden" name="idPEDIDOS"
-                                       value="<?= (int) $pedido['idPEDIDOS'] ?>">
-
-                                <input type="hidden" name="idCLIENTES"
-                                       value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
-
-                                <select name="status" class="form-select mb-2">
-
-                                    <option value="Aguardando confirmação">
-                                        Aguardando confirmação
-                                    </option>
-
-                                    <option value="Confirmado">Confirmado</option>
-
-                                    <option value="Em preparo">Em preparo</option>
-
-                                    <option value="Pronto para retirada">
-                                        Pronto para retirada
-                                    </option>
-
-                                    <option value="Entregue">Entregue</option>
-
-                                    <option value="Retirado">Retirado</option>
-
-                                    <option value="Cancelado">Cancelado</option>
-
-                                </select>
-
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    Salvar
-                                </button>
-
-                            </form>
-
-                        </td>
-
-                    </tr>
-
-                <?php endforeach; ?>
-
-            <?php endif; ?>
-
+            <tr>
+                <td colspan="8" class="text-center">
+                    Nenhum pedido ativo.
+                </td>
+            </tr>
         </tbody>
 
-    </table>
+    <?php else: ?>
+
+        <?php foreach ($pedidosAtivos as $pedido): ?>
+
+            <?php
+            $itens = listarItensDoPedido(
+                $mysqli,
+                (int) $pedido['idPEDIDOS'],
+                (int) $pedido['CLIENTES_idCLIENTES']
+            );
+
+            $totalLinhas = max(count($itens), 1);
+            ?>
+
+            <tbody>
+
+                <?php if (count($itens) > 0): ?>
+
+                    <?php foreach ($itens as $indice => $item): ?>
+
+                        <tr>
+
+                            <?php if ($indice === 0): ?>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+                                    <?= (int) $pedido['idPEDIDOS'] ?>
+                                </td>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+                                    <?= htmlspecialchars($pedido['nome_Clientes']) ?>
+                                    <br>
+                                    <small>ID: <?= (int) $pedido['CLIENTES_idCLIENTES'] ?></small>
+                                </td>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+                                    <?= htmlspecialchars($pedido['data_PEDIDOS']) ?>
+                                </td>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+                                    <?= htmlspecialchars($pedido['status_PEDIDOS']) ?>
+                                </td>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+                                    <?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?>
+                                </td>
+
+                            <?php endif; ?>
+
+                            <td>
+                                <?= htmlspecialchars($item['nome_PRODUTOS']) ?>
+                            </td>
+
+                            <td>
+                                <?= (int) $item['quantidade_PRODUTOS'] ?>
+                            </td>
+
+                            <?php if ($indice === 0): ?>
+
+                                <td rowspan="<?= $totalLinhas ?>">
+
+                                    <form action="../form/atualizar_status_pedido.php" method="POST">
+
+                                        <input type="hidden" name="idPEDIDOS"
+                                               value="<?= (int) $pedido['idPEDIDOS'] ?>">
+
+                                        <input type="hidden" name="idCLIENTES"
+                                               value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
+
+                                        <select name="status" class="form-select mb-2">
+
+                                            <option value="Aguardando confirmação">Aguardando confirmação</option>
+                                            <option value="Confirmado">Confirmado</option>
+                                            <option value="Em preparo">Em preparo</option>
+                                            <option value="Pronto para retirada">Pronto para retirada</option>
+                                            <option value="Entregue">Entregue</option>
+                                            <option value="Retirado">Retirado</option>
+                                            <option value="Cancelado">Cancelado</option>
+
+                                        </select>
+
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Salvar
+                                        </button>
+
+                                    </form>
+
+                                </td>
+
+                            <?php endif; ?>
+
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+
+                    <tr>
+                        <td><?= (int) $pedido['idPEDIDOS'] ?></td>
+                        <td><?= htmlspecialchars($pedido['nome_Clientes']) ?></td>
+                        <td><?= htmlspecialchars($pedido['data_PEDIDOS']) ?></td>
+                        <td><?= htmlspecialchars($pedido['status_PEDIDOS']) ?></td>
+                        <td><?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?></td>
+                        <td colspan="2">Nenhum item cadastrado</td>
+                        <td>
+                            <!-- Nenhum item para atualizar -->
+                        </td>
+                    </tr>
+
+                <?php endif; ?>
+
+            </tbody>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
+
+</table>
+
 
     <br>
 
