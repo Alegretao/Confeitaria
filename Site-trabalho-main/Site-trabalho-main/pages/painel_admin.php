@@ -111,65 +111,55 @@ foreach ($pedidos as $pedido) {
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>#Pedido</th>
-            <th>Cliente</th>
-            <th>Data</th>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Descrição</th>
             <th>Status</th>
-            <th>Retirada</th>
-            <th>Itens</th>
-            <th>Atualizar</th>
+            <th>Disponibilidade</th>
         </tr>
     </thead>
 
     <tbody>
-        <?php if (count($pedidosAtivos) === 0): ?>
+        <?php if (count($produtos) === 0): ?>
             <tr>
-                <td colspan="7" class="text-center">Nenhum pedido ativo.</td>
+                <td colspan="5" class="text-center">Nenhum produto cadastrado.</td>
             </tr>
         <?php else: ?>
-            <?php foreach ($pedidosAtivos as $pedido): ?>
-                <?php $itens = listarItensDoPedido($mysqli, (int) $pedido['idPEDIDOS'], (int) $pedido['CLIENTES_idCLIENTES']); ?>
-
+            <?php foreach ($produtos as $produto): ?>
                 <tr>
-                    <td><?= (int) $pedido['idPEDIDOS'] ?></td>
-                    <td><?= htmlspecialchars($pedido['nome_Clientes']) ?></td>
-                    <td><?= htmlspecialchars($pedido['data_PEDIDOS']) ?></td>
-                    <td><?= htmlspecialchars($pedido['status_PEDIDOS']) ?></td>
-                    <td><?= htmlspecialchars($pedido['retirada_PEDIDOS']) ?></td>
-
                     <td>
-                        <ul class="mb-0">
-                            <?php foreach ($itens as $item): ?>
-                                <li>
-                                    <?= htmlspecialchars($item['nome_PRODUTOS']) ?>
-                                    (x<?= (int) $item['quantidade_PRODUTOS'] ?>)
-                                    — R$ <?= number_format((float) $item['preco_PRODUTOS'], 2, ',', '.') ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php $img = basename((string) $produto['url_IMAGENS']); ?>
+                        <img src="../img/<?= htmlspecialchars($img) ?>" alt="" style="max-width:80px;">
                     </td>
 
+                    <td><?= htmlspecialchars($produto['nome_PRODUTOS']) ?></td>
+
+                    <td><?= htmlspecialchars($produto['descricao_PRODUTOS']) ?></td>
+
+                    <td><?= htmlspecialchars($produto['status_PRODUTOS']) ?></td>
+
                     <td>
-                        <form action="../form/atualizar_status.php" method="POST">
-                            <input type="hidden" name="idPEDIDOS"
-                                   value="<?= (int) $pedido['idPEDIDOS'] ?>">
+                        <form action="../form/atualizar_status_produto.php" method="POST">
+                            <input type="hidden" name="idPRODUTOS"
+                                   value="<?= (int) $produto['idPRODUTOS'] ?>">
 
-                            <input type="hidden" name="idCLIENTES"
-                                   value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
+                            <?php if ($produto['status_PRODUTOS'] === 'Disponível'): ?>
 
-                            <select name="status" class="form-select mb-2">
-                                <option value="Aguardando confirmação">Aguardando confirmação</option>
-                                <option value="Confirmado">Confirmado</option>
-                                <option value="Em preparo">Em preparo</option>
-                                <option value="Pronto para retirada">Pronto para retirada</option>
-                                <option value="Entregue">Entregue</option>
-                                <option value="Retirado">Retirado</option>
-                                <option value="Cancelado">Cancelado</option>
-                            </select>
+                                <input type="hidden" name="status" value="Indisponível">
 
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                Salvar
-                            </button>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Tornar indisponível
+                                </button>
+
+                            <?php else: ?>
+
+                                <input type="hidden" name="status" value="Disponível">
+
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Tornar disponível
+                                </button>
+
+                            <?php endif; ?>
                         </form>
                     </td>
                 </tr>
