@@ -1,47 +1,35 @@
 <?php
-require_once __DIR__ .'/avaliacoes.php';
-require_once __DIR__ . '/auth.php';
 
-exigirAdministrador();
+session_start();
 
-header('Content-Type: application/json; charset=utf-8');
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['sucesso' => false]);
+if (!isset($_SESSION["usuario_id"]) || $_SESSION["usuario_tipo"] != "admin") {
+    header("Location: ../pages/login.php");
     exit;
 }
 
-$idPedido = (int) ($_POST['idPEDIDOS'] ?? 0);
-$idCliente = (int) ($_POST['CLIENTES_idCLIENTES'] ?? 0);
-$status = $_POST['status_PEDIDOS'] ?? '';
+include("avaliacoes.php");
 
-$statusPermitidos = [
-    'Aguardando confirmação',
-    'Confirmado',
-    'Em preparo',
-    'Pronto para retirada',
-    'Entregue',
-    'Retirado',
-    'Cancelado'
-];
+$conn = conectar();
 
-if ($idPedido <= 0 || $idCliente <= 0 || !in_array($status, $statusPermitidos, true)) {
-    echo json_encode(['sucesso' => false]);
+$idProduto = (int) $_POST["idPRODUTOS"];
+$status = $_POST["status"];
+
+if ($status != "Disponível" && $status != "Indisponível") {
+    header("Location: ../pages/painel_admin.php?produto=erro");
     exit;
 }
 
-$mysqli = conectar();
+$sql = "UPDATE PRODUTOS
+        SET status_PRODUTOS = '$status'
+        WHERE idPRODUTOS = $idProduto";
 
-$sql = "UPDATE PEDIDOS
-        SET status_PEDIDOS = ?
-        WHERE idPEDIDOS = ? AND CLIENTES_idCLIENTES = ?";
+if (mysqli_query($conn, $sql)) {
+    mysqli_close($conn);
+    header("Location: ../pages/painel_admin.php?produto=status_sucesso");
+} else {
+    mysqli_close($conn);
+    header("Location: ../pages/painel_admin.php?produto=erro");
+}
 
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param('sii', $status, $idPedido, $idCliente);
-
-$sucesso = $stmt->execute();
-
-$stmt->close();
-$mysqli->close();
-
-echo json_encode(['sucesso' => $sucesso]);
+exit;
+?>
