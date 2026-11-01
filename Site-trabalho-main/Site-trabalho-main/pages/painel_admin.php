@@ -179,6 +179,16 @@ foreach ($pedidos as $pedido) {
                 <td><?= htmlspecialchars($cliente['nome_Clientes']) ?></td>
                 <td><?= htmlspecialchars($cliente['endereco_Clientes'] ?? '') ?></td>
                 <td><?= htmlspecialchars($cliente['telefone_Clientes'] ?? '') ?></td>
+                <td>
+                <a href="../form/alterar_cliente.php?id=<?= $cliente['idCLIENTES'] ?>"
+                   class="btn btn-warning btn-sm">
+                    Alterar
+                </a>
+
+               <button class="btn btn-danger btn-sm" disabled>
+                       Excluir
+               </button>
+               </td>
               </tr>
             <?php endforeach; ?>
           <?php endif; ?>
