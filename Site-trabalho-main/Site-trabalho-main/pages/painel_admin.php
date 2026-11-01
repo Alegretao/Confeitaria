@@ -49,6 +49,69 @@ foreach ($pedidos as $pedido) {
 
       <h3>Pedidos</h3>
 
+<form action="../form/adicionar_pedido.php" method="POST" class="mb-4">
+
+    <h5>Adicionar pedido</h5>
+
+    <label>Cliente:</label>
+    <select name="cliente" class="form-control" required>
+        <option value="">Selecione um cliente</option>
+
+        <?php foreach ($clientes as $cliente): ?>
+            <option value="<?= $cliente['idCLIENTES'] ?>">
+                <?= htmlspecialchars($cliente['nome_Clientes']) ?>
+            </option>
+        <?php endforeach; ?>
+
+    </select>
+
+    <br>
+
+    <label>Data do pedido:</label>
+    <input type="date" name="data" class="form-control" required>
+
+    <br>
+
+    <label>Retirada:</label>
+    <input type="text" name="retirada" class="form-control"
+           placeholder="Ex: Retirada na loja" maxlength="45" required>
+
+    <br>
+
+    <h5>Produtos do pedido</h5>
+
+    <?php for ($i = 0; $i < 10; $i++): ?>
+
+        <div class="row mb-2">
+
+            <div class="col-md-6">
+                <select name="produto[]" class="form-control">
+                    <option value="">Selecione um produto</option>
+
+                    <?php foreach ($produtos as $produto): ?>
+                        <option value="<?= $produto['idPRODUTOS'] ?>">
+                            <?= htmlspecialchars($produto['nome_PRODUTOS']) ?>
+                        </option>
+                    <?php endforeach; ?>
+
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <input type="number" name="quantidade[]"
+                       class="form-control" placeholder="Quantidade" min="1">
+            </div>
+
+        </div>
+
+    <?php endfor; ?>
+
+    <button type="submit" class="btn btn-success mt-3">
+        Cadastrar pedido
+    </button>
+
+</form>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -92,8 +155,11 @@ foreach ($pedidos as $pedido) {
 
                     <td>
                         <form action="../form/atualizar_status.php" method="POST">
-                            <input type="hidden" name="idPEDIDOS" value="<?= (int) $pedido['idPEDIDOS'] ?>">
-                            <input type="hidden" name="idCLIENTES" value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
+                            <input type="hidden" name="idPEDIDOS"
+                                   value="<?= (int) $pedido['idPEDIDOS'] ?>">
+
+                            <input type="hidden" name="idCLIENTES"
+                                   value="<?= (int) $pedido['CLIENTES_idCLIENTES'] ?>">
 
                             <select name="status" class="form-select mb-2">
                                 <option value="Aguardando confirmação">Aguardando confirmação</option>
@@ -115,7 +181,6 @@ foreach ($pedidos as $pedido) {
         <?php endif; ?>
     </tbody>
 </table>
-
       <br/>
 
       <h3>Produtos</h3>
