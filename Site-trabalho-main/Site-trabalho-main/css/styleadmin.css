@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Brittany';
+    src: url('../css/fonts/Brittany.ttf');
+}
+
 body {
     background-color: #fdfaf5;
     font-family: 'Times New Roman', Times, serif;
@@ -5,25 +10,39 @@ body {
 }
 
 .painel-encantado {
-    background-color: #fdfaf5;
     min-height: 100vh;
     padding: 30px;
+    background-color: #fdfaf5;
 }
 
-/* TÍTULOS */
+/* TÍTULO PRINCIPAL */
 
-.painel-encantado h1 {
-    color: #8b612d;
-    font-size: 2.8rem;
-    font-weight: bold;
+.titulo-admin {
+    background: linear-gradient(135deg, #fffaf1, #d1b586);
+    border: 2px solid #c38b2d;
+    border-radius: 18px;
+    padding: 20px 30px;
+    margin: 10px auto 35px;
+    max-width: 650px;
     text-align: center;
-    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.10);
 }
+
+.titulo-admin h1 {
+    font-family: 'Brittany', cursive;
+    font-size: 3.5rem;
+    color: #6b4328;
+    margin: 0;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.5);
+}
+
+/* TÍTULOS DAS SEÇÕES */
 
 .painel-encantado h2 {
     color: #8b612d;
     font-size: 1.8rem;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .painel-encantado h3 {
@@ -32,13 +51,13 @@ body {
     margin-bottom: 15px;
 }
 
-/* CARDS E SEÇÕES */
+/* CARDS */
 
 .painel-encantado .card {
-    background-color: #ffffff;
+    background-color: #fff;
     border: 1px solid #eadcc5;
     border-radius: 18px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
     margin-bottom: 25px;
     overflow: hidden;
 }
@@ -58,34 +77,41 @@ body {
 /* TABELAS */
 
 .painel-encantado .table {
-    background-color: #ffffff;
-    border-color: #e5d3b3;
+    background-color: white;
+    border: 1px solid #eadcc5;
     border-radius: 12px;
     overflow: hidden;
     vertical-align: middle;
+    margin-bottom: 25px;
 }
 
 .painel-encantado .table thead th {
     background-color: #d1b586;
     color: #5a3923;
     font-weight: bold;
-    padding: 14px;
+    padding: 16px 12px;
     border-color: #c4a675;
     text-align: center;
+    white-space: nowrap;
 }
 
 .painel-encantado .table tbody td {
     color: #6b4328;
-    padding: 12px;
+    padding: 14px 12px;
     border-color: #eadcc5;
     vertical-align: middle;
 }
 
-.painel-encantado .table tbody tr:hover {
-    background-color: #fff8eb;
+.painel-encantado .table tbody tr:nth-child(even) {
+    background-color: #fffaf1;
 }
 
-/* IMAGENS DOS PRODUTOS */
+.painel-encantado .table tbody tr:hover {
+    background-color: #f7ecd8;
+    transition: 0.2s;
+}
+
+/* IMAGENS */
 
 .painel-encantado table img {
     max-width: 85px;
@@ -103,38 +129,40 @@ body {
     border-radius: 10px;
     padding: 10px;
     color: #6b4328;
-    background-color: #ffffff;
+    background-color: white;
 }
 
 .painel-encantado .form-control:focus,
 .painel-encantado .form-select:focus {
     border-color: #b8863b;
-    box-shadow: 0 0 0 0.2rem rgba(184, 134, 59, 0.20);
+    box-shadow: 0 0 0 0.2rem rgba(184,134,59,0.20);
 }
 
-/* BOTÕES GERAIS */
+/* TODOS OS BOTÕES */
 
 .painel-encantado .btn {
     border-radius: 10px;
     font-weight: bold;
+    padding: 9px 16px;
     transition: 0.3s ease;
-    padding: 8px 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
-/* BOTÃO PRINCIPAL */
+/* CADASTRAR PEDIDO E PRODUTO / ADICIONAR PEDIDO */
 
 .painel-encantado .btn-primary {
     background-color: #b8863b;
-    border-color: #b8863b;
+    border: 1px solid #b8863b;
     color: #fffaf1;
 }
 
 .painel-encantado .btn-primary:hover {
     background-color: #946a2d;
     border-color: #946a2d;
+    transform: translateY(-2px);
 }
 
-/* BOTÃO DE DISPONIBILIDADE */
+/* TORNAR DISPONÍVEL */
 
 .painel-encantado .btn-success {
     background-color: #71845b;
@@ -144,9 +172,11 @@ body {
 
 .painel-encantado .btn-success:hover {
     background-color: #596b45;
+    border-color: #596b45;
+    transform: translateY(-2px);
 }
 
-/* BOTÃO DE INDISPONIBILIDADE E EXCLUSÃO */
+/* TORNAR INDISPONÍVEL E EXCLUIR */
 
 .painel-encantado .btn-danger {
     background-color: #a65343;
@@ -156,9 +186,11 @@ body {
 
 .painel-encantado .btn-danger:hover {
     background-color: #873d30;
+    border-color: #873d30;
+    transform: translateY(-2px);
 }
 
-/* BOTÃO DE ALTERAÇÃO */
+/* ALTERAR */
 
 .painel-encantado .btn-warning {
     background-color: #d1a24f;
@@ -170,14 +202,21 @@ body {
     background-color: #b8863b;
     border-color: #b8863b;
     color: white;
+    transform: translateY(-2px);
 }
 
-/* STATUS DOS PEDIDOS E PRODUTOS */
+/* STATUS */
 
 .painel-encantado .badge {
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 0.85rem;
+}
+
+/* ALERTAS */
+
+.painel-encantado .alert {
+    border-radius: 12px;
 }
 
 /* LINKS */
@@ -186,23 +225,15 @@ body {
     text-decoration: none;
 }
 
-/* MENSAGENS */
-
-.painel-encantado .alert {
-    border-radius: 12px;
-    border: none;
-}
-
 /* RESPONSIVIDADE */
 
 @media (max-width: 768px) {
-
     .painel-encantado {
         padding: 15px;
     }
 
-    .painel-encantado h1 {
-        font-size: 2rem;
+    .titulo-admin h1 {
+        font-size: 2.5rem;
     }
 
     .painel-encantado h2 {
