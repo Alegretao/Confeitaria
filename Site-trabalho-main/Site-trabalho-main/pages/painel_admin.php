@@ -54,13 +54,9 @@ foreach ($pedidos as $pedido) {
     <h5>Adicionar pedido</h5>
 
     <label>Cliente:</label>
-    <select name="cliente" class="form-control" required>
-        <option value="">Selecione um cliente</option>
-
-        <?php foreach ($clientes as $cliente): ?>
-            <option value="<?= $cliente['idCLIENTES'] ?>">
-                <?= htmlspecialchars($cliente['nome_Clientes']) ?>
-            </option>
+  <label>Nome do cliente:</label>
+    <input type="text" name="nome_cliente" class="form-control"
+       maxlength="50" placeholder="Digite o nome do cliente" required>  
         <?php endforeach; ?>
 
     </select>
