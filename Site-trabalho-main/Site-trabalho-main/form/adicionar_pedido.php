@@ -1,91 +1,141 @@
 <?php
 
-// Inicia a sessão
 session_start();
 
-// Verifica se o administrador está logado
 if (!isset($_SESSION["usuario_id"]) || $_SESSION["usuario_tipo"] != "admin") {
     header("Location: ../pages/login.php");
     exit;
 }
 
-// Inclui a conexão com o banco
 include("avaliacoes.php");
 
-// Conecta ao banco
 $conn = conectar();
 
-// Recebe os dados do formulário
-$cliente = (int) $_POST["cliente"];
+// Receber os dados do formulário
+
+$nomeCliente = mysqli_real_escape_string($conn, trim($_POST["nome_cliente"]));
 $data = mysqli_real_escape_string($conn, $_POST["data"]);
 $retirada = mysqli_real_escape_string($conn, $_POST["retirada"]);
 
-$produtos = $_POST["produto"];
-$quantidades = $_POST["quantidade"];
+$produtos = $_POST["produto"] ?? [];
+$quantidades = $_POST["quantidade"] ?? [];
 
-// Verifica se existe pelo menos um produto
+// Verificar se existe pelo menos um produto válido
+
 $temProduto = false;
 
-foreach ($produtos as $produto) {
-    if ($produto != "") {
+for ($i = 0; $i < count($produtos); $i++) {
+
+    $idProduto = (int) $produtos[$i];
+    $quantidade = (int) ($quantidades[$i] ?? 0);
+
+    if ($idProduto > 0 && $quantidade > 0) {
         $temProduto = true;
     }
 }
 
-if (!$temProduto) {
-    header("Location: ../pages/painel_admin.php?pedido=sem_produto");
+if ($nomeCliente == "" || !$temProduto) {
+    mysqli_close($conn);
+    header("Location: ../pages/painel_admin.php?pedido=erro");
     exit;
 }
 
-// Cadastra o pedido
+// Procurar o cliente pelo nome
+
+$sql = "SELECT idCLIENTES
+        FROM CLIENTES
+        WHERE nome_Clientes = '$nomeCliente'
+        LIMIT 1";
+
+$resultado = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($resultado) > 0) {
+
+    // Cliente já cadastrado
+
+    $cliente = mysqli_fetch_assoc($resultado);
+    $idCliente = (int) $cliente['idCLIENTES'];
+
+} else {
+
+    // Cliente ainda não cadastrado
+
+    $sql = "INSERT INTO CLIENTES (nome_Clientes)
+            VALUES ('$nomeCliente')";
+
+    if (mysqli_query($conn, $sql)) {
+
+        $idCliente = mysqli_insert_id($conn);
+
+    } else {
+
+        mysqli_close($conn);
+        header("Location: ../pages/painel_admin.php?pedido=erro");
+        exit;
+    }
+}
+
+// Criar o pedido
+
 $sql = "INSERT INTO PEDIDOS
         (CLIENTES_idCLIENTES, data_PEDIDOS, status_PEDIDOS, retirada_PEDIDOS)
         VALUES
-        ($cliente, '$data', 'Aguardando confirmação', '$retirada')";
+        ($idCliente, '$data', 'Aguardando confirmação', '$retirada')";
 
 if (mysqli_query($conn, $sql)) {
 
-    // Pega o número do pedido criado
     $idPedido = mysqli_insert_id($conn);
 
-    // Percorre os produtos selecionados
+    // Adicionar os produtos ao pedido
+
     for ($i = 0; $i < count($produtos); $i++) {
 
         $idProduto = (int) $produtos[$i];
-        $quantidade = (int) $quantidades[$i];
+        $quantidade = (int) ($quantidades[$i] ?? 0);
 
-        // Ignora os espaços que não foram preenchidos
         if ($idProduto > 0 && $quantidade > 0) {
 
-            // Verifica se esse produto já foi adicionado ao pedido
+            // Verificar se o produto já está no pedido
+
             $sql = "SELECT quantidade_PRODUTOS
                     FROM ITENS_PEDIDOS
                     WHERE PEDIDOS_idPEDIDOS = $idPedido
                     AND PRODUTOS_idPRODUTOS = $idProduto
-                    AND PEDIDOS_CLIENTES_idCLIENTES = $cliente";
+                    AND PEDIDOS_CLIENTES_idCLIENTES = $idCliente";
 
             $resultado = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($resultado) > 0) {
 
-                // Soma a quantidade caso o produto já exista
+                // Somar a quantidade
+
                 $sql = "UPDATE ITENS_PEDIDOS
                         SET quantidade_PRODUTOS = quantidade_PRODUTOS + $quantidade
                         WHERE PEDIDOS_idPEDIDOS = $idPedido
                         AND PRODUTOS_idPRODUTOS = $idProduto
-                        AND PEDIDOS_CLIENTES_idCLIENTES = $cliente";
+                        AND PEDIDOS_CLIENTES_idCLIENTES = $idCliente";
 
             } else {
 
-                // Cadastra o produto no pedido
+                // Inserir produto novo no pedido
+
                 $sql = "INSERT INTO ITENS_PEDIDOS
                         (PEDIDOS_idPEDIDOS, PRODUTOS_idPRODUTOS,
                          PEDIDOS_CLIENTES_idCLIENTES, quantidade_PRODUTOS)
                         VALUES
-                        ($idPedido, $idProduto, $cliente, $quantidade)";
+                        ($idPedido, $idProduto, $idCliente, $quantidade)";
             }
 
-            mysqli_query($conn, $sql);
+            if (!mysqli_query($conn, $sql)) {
+
+                mysqli_query($conn, "DELETE FROM PEDIDOS
+                                     WHERE idPEDIDOS = $idPedido
+                                     AND CLIENTES_idCLIENTES = $idCliente");
+
+                mysqli_close($conn);
+                header("Location: ../pages/painel_admin.php?pedido=erro");
+                exit;
+            }
         }
     }
 
