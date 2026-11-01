@@ -18,7 +18,7 @@ foreach ($pedidos as $pedido) {
   $status = $pedido['status_PEDIDOS'] ?? '';
 
   if (in_array($status, ['Entregue','Retirado', 'Cancelado'], true)) {
-    $pedidoHistorico[] = $pedido;
+    $pedidosHistorico[] = $pedido;
   } else {
     $pedidosAtivos[] = $pedido;
   }
