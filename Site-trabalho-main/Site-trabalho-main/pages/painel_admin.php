@@ -14,6 +14,8 @@ $clientes = listarClientes($mysqli);
 $pedidosAtivos = [];
 $pedidosHistorico = [];
 
+
+
 foreach ($pedidos as $pedido) {
     $status = strtolower($pedido['status_PEDIDOS'] ?? '');
 
@@ -37,7 +39,7 @@ foreach ($pedidos as $pedido) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/stylehome.css">
+    <link rel="stylesheet" href="../css/styleadmin.css">
 </head>
 
 <body>
